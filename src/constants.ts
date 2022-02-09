@@ -1,4 +1,4 @@
-export const DIFFERENCE_RATIO = 40;
+export const DIFFERENCE_RATIO = 30;
 
 export const OUTPUT_PATH = 'result.txt';
 
@@ -16,6 +16,11 @@ export const HEX_LIST_INPUT = [
   '#222222',
   '#282C34',
   '#2B79C2',
+  '#1E88CD',
+  '#DD95B0',
+  '#6FC688',
+  '#F2A993',
+  '#9386BE',
   '#303030',
   '#3085d6',
   '#333333',
@@ -70,6 +75,5 @@ export const HEX_LIST_INPUT = [
   '#F3F5F7',
   '#F5FAFF',
   '#F5F5F5',
-  '#FF0000',
   '#FFFFFF',
 ];
