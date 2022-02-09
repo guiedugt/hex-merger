@@ -25,7 +25,7 @@ export const rgbToHex = (rgb: IRGB): string => {
     return char;
   };
 
-  return `#${getHex(r)}${getHex(g)}${getHex(b)}`;
+  return `#${getHex(r)}${getHex(g)}${getHex(b)}`.toUpperCase();
 };
 
 export const getRGBListAvg = (rgbList: IRGB[]): IRGB => {
