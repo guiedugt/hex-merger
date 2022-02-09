@@ -3,3 +3,8 @@ export interface IRGB {
     g: number;
     b: number;
 }
+
+export interface IResult {
+    to: string;
+    from: string[];
+}

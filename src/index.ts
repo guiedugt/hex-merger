@@ -1,9 +1,12 @@
-import {
-  hexList, hexToRGB, rgbToHex, getRGBListAvg, isSimilarRGB,
-} from './helpers';
-import { IRGB } from './types';
+import fs from 'fs';
 
-const rgbList: IRGB[] = hexList.map(hexToRGB);
+import {
+  hexToRGB, rgbToHex, getRGBListAvg, isSimilarRGB,
+} from './helpers';
+import { HEX_LIST_INPUT, OUTPUT_PATH } from './constants';
+import { IResult, IRGB } from './types';
+
+const rgbList: IRGB[] = HEX_LIST_INPUT.map(hexToRGB);
 
 const similarRGBLists = rgbList.reduce((similarLists, rgb) => {
   if (similarLists.length === 0) {
@@ -24,13 +27,13 @@ const similarRGBLists = rgbList.reduce((similarLists, rgb) => {
   return [...similarLists, [rgb]];
 }, [] as IRGB[][]);
 
-const equivalentHexList = similarRGBLists
-  .map(getRGBListAvg)
-  .map(rgbToHex);
+const results: IResult[] = similarRGBLists.map((similarRGBList) => ({
+  from: similarRGBList.map(rgbToHex),
+  to: rgbToHex(getRGBListAvg(similarRGBList)),
+}));
 
-const similarHexList = similarRGBLists
-  .map((similarList) => similarList.map(rgbToHex));
+const output: string = results
+  .map(({ from, to }) => `${to}: ${from.join(', ')}`)
+  .join('\n');
 
-console.log({
-  similarHexList, similarHexListLength: similarHexList.length, equivalentHexList, equivalentHexListLength: equivalentHexList.length,
-});
+fs.writeFileSync(OUTPUT_PATH, output, { encoding: 'utf-8' });
